@@ -26,6 +26,15 @@ type NetworkTier string
 // LbScheme represents the possible types of load balancers
 type LbScheme string
 
+// LbOptions represents the extra options specified when creating a
+// load balancer. Currently supported for Internal LoadBalancer.
+type LbOptions struct {
+	// name of the subnet to assign LoadBalancer VIP from
+	subnetName string
+	// Indicates whether global access is enabled for the LoadBalancer
+	enableGlobalAccess bool
+}
+
 const (
 	NetworkTierStandard NetworkTier = "Standard"
 	NetworkTierPremium  NetworkTier = "Premium"
