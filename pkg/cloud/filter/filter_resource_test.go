@@ -22,7 +22,6 @@ import (
 	"os"
 	"testing"
 
-	"golang.org/x/oauth2/google"
 	"google.golang.org/api/compute/v1"
 )
 
@@ -39,15 +38,7 @@ func TestFilterResources(t *testing.T) {
 		t.Skip("Missing projectID... skipping test")
 	}
 
-	// See https://cloud.google.com/docs/authentication/.
-	// Use GOOGLE_APPLICATION_CREDENTIALS environment variable to specify
-	// a service account key file to authenticate to the API.
-	hc, err := google.DefaultClient(context.Background(), compute.ComputeScope)
-	if err != nil {
-		t.Errorf("Could not get authenticated client: %v", err)
-	}
-
-	svc, err := compute.New(hc)
+	svc, err := compute.NewService(context.Background())
 	if err != nil {
 		t.Errorf("Could not initialize compute client: %v", err)
 	}
